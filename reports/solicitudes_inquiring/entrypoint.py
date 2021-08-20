@@ -15,10 +15,12 @@ from reports.utils import convert_to_datetime, get_basic_value, get_value, today
 
 
 # Customer TaxID included in Header
-HEADERS = ('Label01','Label02','Label03','Label04','Label05',
-            'Label06','Label07','Label08','Label09','Label10',
-            'Label11','Label12','Label13','Label14','Label15',
-            'Label16','Label17')
+HEADERS = (
+    'Request ID','Created at','Last Change At','Customer ID','Customer Name',
+    'Customer Tax ID','Customer External ID','Asset ID','Asset External ID',
+    'Tech.Contact Name', 'TC Name Reason','Tech.Contact e-Mail','TC e-Mail Reason',
+    'Tech.Contact Phone','TC Phone Reason','Domain','Domain Reason'
+    )
 
 # HEADERS = (
 #    'Request ID', 
