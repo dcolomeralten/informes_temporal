@@ -6,4 +6,3 @@ Report accepts to limit the output by:
 * Product List
 * Marketplaces
 
-Report will be generated only in Excel2020 format.
