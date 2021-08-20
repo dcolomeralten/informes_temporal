@@ -15,22 +15,32 @@ from reports.utils import convert_to_datetime, get_basic_value, get_value, today
 
 
 # Customer TaxID included in Header
-HEADERS = (
-    'Request ID', 'Request Type', 'Request Status',
-    'Created At', 'Updated At', 'Exported At',
-    'Customer ID', 'Customer Name', 
-    # CR20210728 - Field added
-    'Customer TaxID', 
-    # CR20210728 - END
-    'Customer External ID',
-    'Tier 1 ID', 'Tier 1 Name', 'Tier 1 External ID',
-    'Tier 2 ID', 'Tier 2 Name', 'Tier 2 External ID',
-    'Provider  ID', 'Provider Name', 'Vendor ID', 'Vendor Name',
-    'Product ID', 'Product Name',
-    'Asset ID', 'Asset External ID', 'Transaction Type',
-    'Hub ID', 'Hub Name', 'Asset Status',
-)
+HEADERS = ('Label01','Label02','Label03','Label04','Label05',
+            'Label06','Label07','Label08','Label09','Label10',
+            'Label11','Label12','Label13','Label14','Label15',
+            'Label16','Label17')
 
+# HEADERS = (
+#    'Request ID', 
+#    # CR20210820 - Fields removed.
+#    # 'Request Type', 'Request Status',
+#    # CR20210820 - END
+#    'Created At', 'Last Change At',
+#    # CR20210820 - Fields removed.
+#    # 'Exported At',
+#    # CR20210820 - END
+#    'Customer ID', 'Customer Name', 
+#    # CR20210728 - Field added
+#    'Customer TaxID', 
+#    # CR20210728 - END
+#    'Customer External ID',
+#    #'Tier 1 ID', 'Tier 1 Name', 'Tier 1 External ID',
+#    #'Tier 2 ID', 'Tier 2 Name', 'Tier 2 External ID',
+#    'Provider  ID', 'Provider Name', 'Vendor ID', 'Vendor Name',
+#    #'Product ID', 'Product Name',
+#    'Asset ID', 'Asset External ID', 'Transaction Type',
+#    'Hub ID', 'Hub Name', 'Asset Status',
+#)
 
 def generate(
     client=None,
@@ -63,6 +73,7 @@ def generate(
 
 def _get_requests(client, parameters):
     all_types = ['inquiring']
+    all_connections = ['production']
 
     query = R()
     query &= R().created.ge(parameters['date']['after'])
@@ -80,6 +91,10 @@ def _get_requests(client, parameters):
         query &= R().asset.marketplace.id.oneof(parameters['mkp']['choices'])
     if parameters.get('hub') and parameters['hub']['all'] is False:
         query &= R().asset.connection.hub.id.oneof(parameters['hub']['choices'])
+    # CR20210920
+    else:
+        query &= R().asset.connection.type.oneof(all_connections)
+    # CR20210920
 
     return client.requests.filter(query)
 
@@ -87,8 +102,10 @@ def _get_requests(client, parameters):
 def _process_line(request, connection):
     return (
         get_basic_value(request, 'id'),
-        get_basic_value(request, 'type'),
-        get_basic_value(request, 'status'),
+        # CR20210820
+        #get_basic_value(request, 'type'),
+        #get_basic_value(request, 'status'),
+        # CR20210820
         convert_to_datetime(
             get_basic_value(request, 'created'),
         ),
@@ -112,14 +129,14 @@ def _process_line(request, connection):
         # get_value(request['asset']['connection'], 'provider', 'name'),
         # get_value(request['asset']['connection'], 'vendor', 'id'),
         # get_value(request['asset']['connection'], 'vendor', 'name'),
-        get_value(request['asset'], 'product', 'id'),
-        get_value(request['asset'], 'product', 'name'),
+        # get_value(request['asset'], 'product', 'id'),
+        # get_value(request['asset'], 'product', 'name'),
         get_value(request, 'asset', 'id'),
         get_value(request, 'asset', 'external_id'),
-        get_value(request['asset'], 'connection', 'type'),
-        get_value(connection, 'hub', 'id') if 'hub' in connection else '',
-        get_value(connection, 'hub', 'name') if 'hub' in connection else '',
-        get_value(request, 'asset', 'status'),
+        #get_value(request['asset'], 'connection', 'type'),
+        #get_value(connection, 'hub', 'id') if 'hub' in connection else '',
+        #get_value(connection, 'hub', 'name') if 'hub' in connection else '',
+        #get_value(request, 'asset', 'status'),
         # CR20210810 - Adding the specific ordering parameters and reasons
         # CR20210810 - Technical Contact Name
         get_basic_value(request['asset']['params'][20],'value'),

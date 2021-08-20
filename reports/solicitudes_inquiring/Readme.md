@@ -1,9 +1,9 @@
 # Requests Report
-This report provides a view of all transactions received for a given period of time including the tax id for the customer.
+This report provides a list of inquiring requests pending to correct for the products within this vendor.
 
 Report accepts to limit the output by:
-* List of products
-* Type of request
-* Status of the request
-* List of marketplaces
-* List of hubs
+* Report period
+* Product List
+* Marketplaces
+
+Report will be generated only in Excel2020 format.
