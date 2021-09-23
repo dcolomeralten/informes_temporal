@@ -15,12 +15,22 @@ from reports.utils import convert_to_datetime, get_basic_value, get_value, today
 
 
 # Customer TaxID included in Header
+
+# CR20210831
+#HEADERS = (
+#    'Request ID','Created at','Last Change At','Customer ID','Customer Name',
+#    'Customer Tax ID','Customer External ID','Asset ID','Asset External ID',
+#    'Tech.Contact Name', 'TC Name Reason','Tech.Contact e-Mail','TC e-Mail Reason',
+#    'Tech.Contact Phone','TC Phone Reason','Domain','Domain Reason'
+#    )
+
 HEADERS = (
     'Request ID','Created at','Last Change At','Customer ID','Customer Name',
     'Customer Tax ID','Customer External ID','Asset ID','Asset External ID',
-    'Tech.Contact Name', 'TC Name Reason','Tech.Contact e-Mail','TC e-Mail Reason',
-    'Tech.Contact Phone','TC Phone Reason','Domain','Domain Reason'
+    'TC Name Reason','TC e-Mail Reason',
+    'TC Phone Reason','Domain','Domain Reason'
     )
+# CR20210831 - FIN
 
 # HEADERS = (
 #    'Request ID', 
@@ -141,15 +151,21 @@ def _process_line(request, connection):
         #get_value(request, 'asset', 'status'),
         # CR20210810 - Adding the specific ordering parameters and reasons
         # CR20210810 - Technical Contact Name
-        get_basic_value(request['asset']['params'][20],'value'),
+          # CR20210831 - Remove Personal Data
+          #get_basic_value(request['asset']['params'][20],'value'),
+          # CR20210831 - FIN
         # CR20210810 - Technical Contact Name Error
         get_basic_value(request['asset']['params'][20],'value_error'),
         # CR20210810 - Technical Contact e-mail
-        get_basic_value(request['asset']['params'][21],'value'),
+          # CR20210831 - Remove Personal Data
+          # get_basic_value(request['asset']['params'][21],'value'),
+          # CR20210831 - FIN
         # CR20210810 - Technical Contact e-mail Error
         get_basic_value(request['asset']['params'][21],'value_error'),
         # CR20210810 - Technical Contact phone
-        get_basic_value(request['asset']['params'][22],'value'),
+          # CR20210831 - Remove Personal Data
+          # get_basic_value(request['asset']['params'][22],'value'),
+          # CR20210831 - FIN
         # CR20210810 - Technical Contact phone Error
         get_basic_value(request['asset']['params'][22],'value_error'),
         # CR20210810 - Domain
