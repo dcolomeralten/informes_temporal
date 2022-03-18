@@ -155,22 +155,32 @@ def _process_line(request, connection):
           #get_basic_value(request['asset']['params'][20],'value'),
           # CR20210831 - FIN
         # CR20210810 - Technical Contact Name Error
-        get_basic_value(request['asset']['params'][20],'value_error'),
+        # CR20220318 - Change the relative position in asset params from 20 to 23
+        # get_basic_value(request['asset']['params'][20],'value_error'),
+        get_basic_value(request['asset']['params'][23],'value_error'),
         # CR20210810 - Technical Contact e-mail
           # CR20210831 - Remove Personal Data
           # get_basic_value(request['asset']['params'][21],'value'),
           # CR20210831 - FIN
         # CR20210810 - Technical Contact e-mail Error
-        get_basic_value(request['asset']['params'][21],'value_error'),
+        # CR20220318 - Change the relative position in asset params from 21 to 24
+        # get_basic_value(request['asset']['params'][21],'value_error'),
+        get_basic_value(request['asset']['params'][24],'value_error'),
         # CR20210810 - Technical Contact phone
           # CR20210831 - Remove Personal Data
           # get_basic_value(request['asset']['params'][22],'value'),
           # CR20210831 - FIN
         # CR20210810 - Technical Contact phone Error
-        get_basic_value(request['asset']['params'][22],'value_error'),
+        # CR20220318 - Change the relative position in asset params from 22 to 25
+        # get_basic_value(request['asset']['params'][22],'value_error'),
+        get_basic_value(request['asset']['params'][25],'value_error'),
         # CR20210810 - Domain
-        get_basic_value(request['asset']['params'][14],'value'),
+        # CR20220318 - Change the relative position in asset params from 14 to 16
+        # get_basic_value(request['asset']['params'][14],'value'),
+        get_basic_value(request['asset']['params'][16],'value'),
         # CR20210810 - Domain Error
-        get_basic_value(request['asset']['params'][14],'value_error'),
+        # CR20220318 - Change the relative position in asset params from 14 to 16
+        # get_basic_value(request['asset']['params'][14],'value_error'),
+        get_basic_value(request['asset']['params'][16],'value_error'),
         # CR20210810 - END
     )
